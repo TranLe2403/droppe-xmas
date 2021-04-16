@@ -1,0 +1,45 @@
+.App {
+  text-align: center;
+}
+
+.app-header {
+  color: #146b3a;
+  font-size: 40px;
+}
+
+.cart-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.single-cart-container {
+  display: flex;
+  background: white;
+  flex-direction: column;
+  margin: 30px;
+  width: 400px;
+  border: thin solid #cecece;
+  height: 600px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.product-list-cover {
+  flex-grow: 1;
+}
+
+.button-cover {
+  margin: 20px;
+}
+
+.review-box-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message {
+  color: #ea4630;
+  font-weight: bold;
+}

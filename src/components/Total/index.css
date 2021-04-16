@@ -1,0 +1,8 @@
+.total-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.total-product-text{
+    text-align: right;
+}

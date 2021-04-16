@@ -1,0 +1,23 @@
+.overview-box-container {
+  width: 80%;
+  height: 100%;
+  background: white;
+  margin-bottom: 50px;
+  padding: 50px;
+  padding-top: 20px;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.overview-fields-container {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: left;
+  border-bottom: thin solid #cecece;
+}
+
+.field-separator {
+  width: 1px;
+  border: thin solid #cecece;
+  background: #cecece;
+}

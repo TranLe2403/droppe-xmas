@@ -1,0 +1,30 @@
+.single-field-container {
+  width: 45%;
+}
+
+.product-info {
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  margin: 20px 0;
+}
+
+.product-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 70%;
+}
+
+.product-image-title-cover {
+  display: flex;
+  width: 60%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.overview-image {
+  width: 20%;
+}
