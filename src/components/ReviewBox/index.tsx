@@ -58,8 +58,6 @@ const ReviewBox = ({
     setAllApprovedProductList(approvedProductList);
   }, [discardList, discardItemList, approveList]);
 
-  console.log(allApprovedProductList);
-
   const productsForTotal: ProductForTotal = allApprovedProductList.reduce(
     (acc: ProductForTotal, val) => {
       const isSavedProductId = acc.hasOwnProperty(val.id); //check if product id is saved already from different cart
@@ -83,7 +81,7 @@ const ReviewBox = ({
   return (
     <div className="overview-box-container">
       <h2>Let's take a look at overview</h2>
-      <div className="overview-fields-container">
+      <div className="overview-fields-container" data-testid="test-fields-container">
         <OverviewField itemsList={approveList} field="Approve" />
         <div className="field-separator"></div>
         <OverviewField itemsList={combinedDiscardArray} field="Discard" />

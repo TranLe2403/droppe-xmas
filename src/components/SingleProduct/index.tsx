@@ -102,7 +102,7 @@ const SingleProduct = ({
   };
 
   return (
-    <>
+    <div>
       <div className="separator"></div>
 
       <div className="single-product-container">
@@ -111,7 +111,7 @@ const SingleProduct = ({
           alt="product-detail"
           className="product-image"
         />
-        
+
         <div className="product-detail ">
           <p className="product-detail-title">
             <strong>{productDetail?.title}</strong>
@@ -123,26 +123,29 @@ const SingleProduct = ({
             <button
               onClick={() => updateQuantityHandler(productDetail.id, 1)}
               className="quantity-button"
+              data-testid="test-substract-quantity-button"
             >
               -
             </button>
-            <p>{productDetail.quantity}</p>
+            <p data-testid="test-product-quantity">{productDetail.quantity}</p>
             <button
               onClick={() => updateQuantityHandler(productDetail.id, -1)}
               className="quantity-button"
+              data-testid="test-plus-quantity-button"
             >
               +
             </button>
             <div
               onClick={() => discardSingleProductHandler(productDetail.id)}
               className="discard-div"
+              data-testid="test-discard-product-button"
             >
               x
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

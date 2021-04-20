@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import "./App.css";
 import {
@@ -92,15 +92,9 @@ const App = (): JSX.Element => {
   const decisionHandler = (cartId: number, action: "approve" | "discard") => {
     const cartsForChildrenCopy = { ...cartsForChildren };
 
-    if (cartsForChildrenCopy === undefined || !action) {
-      throw new Error("Missing data or action");
-    }
-
-    const confirmWindow = window.confirm(
-      `Are you sure you want to ${action.toUpperCase()} all products in this cart`
-    );
-
-    if (!confirmWindow) return;
+    // if (cartsForChildrenCopy === undefined || !action) {
+    //   throw new Error("Missing data or action");
+    // }
 
     const cartsCopyWithAction =
       action === "approve" ? [...approveList] : [...discardList];
@@ -131,6 +125,7 @@ const App = (): JSX.Element => {
             justifyContent: "center",
             fontSize: 24,
           }}
+          data-testid="test-no-content-text"
         >
           IS LOADING ...
         </div>
@@ -155,7 +150,7 @@ const App = (): JSX.Element => {
           />
         </div>
       ) : (
-        <div className="cart-list-container">
+        <div className="cart-list-container" data-testid="test-carts-display">
           {Object.values(cartsForChildren).map((cart) => (
             <div key={cart.id} className="single-cart-container">
               <div className="product-list-cover">
@@ -171,7 +166,7 @@ const App = (): JSX.Element => {
                 />
               </div>
 
-              <div className="button-cover">
+              <div className="button-cover" data-testid="test-action-buttons">
                 <ActionButton
                   updateCartHandler={decisionHandler}
                   buttonName="Approve"

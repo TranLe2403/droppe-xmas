@@ -25,7 +25,7 @@ const ProductList = ({
   setDiscardItemList,
 }: Props) => {
   return (
-    <div>
+    <div data-testid="test-product-list">
       {Object.values(productList).map((item) => {
         return (
           <SingleProduct

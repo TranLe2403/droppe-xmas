@@ -1,8 +1,8 @@
 import React from "react";
 
 type Props = {
-  buttonName: string;
-  backgroundColor: string;
+  buttonName: "Approve" | "Discard";
+  backgroundColor: "#165b33" | "#ea4630";
   cartId: number;
   updateCartHandler: (id: number, action: "approve" | "discard") => void;
 };
@@ -10,14 +10,22 @@ type Props = {
 const ActionButton = ({
   buttonName,
   backgroundColor,
-  updateCartHandler: approveHandler,
+  updateCartHandler: approveDiscardHandler,
   cartId,
 }: Props): JSX.Element => {
+  const handleButtonClick = () => {
+    const confirmWindow = window.confirm(
+      `Are you sure you want to ${buttonName.toUpperCase()} all products in this cart`
+    );
+
+    if (!confirmWindow) return;
+
+    approveDiscardHandler(cartId, buttonName.toLowerCase() as "approve" | "discard");
+  };
+
   return (
     <button
-      onClick={() =>
-        approveHandler(cartId, buttonName === "Approve" ? "approve" : "discard")
-      }
+      onClick={handleButtonClick}
       style={{
         width: "40%",
         margin: 5,
@@ -28,6 +36,7 @@ const ActionButton = ({
         color: "whitesmoke",
         fontWeight: "bold",
       }}
+      data-testid="test-action-button"
     >
       {buttonName}
     </button>
