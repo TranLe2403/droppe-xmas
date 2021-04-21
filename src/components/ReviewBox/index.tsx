@@ -48,7 +48,7 @@ const ReviewBox = ({
     function reportWindowSize() {
       setWidth(getNumberOfItems());
     }
-    
+
     window.addEventListener("resize", reportWindowSize);
 
     return () => {
@@ -96,39 +96,51 @@ const ReviewBox = ({
   );
 
   const productsInTotalArray = Object.values(productsForTotal);
-
+  const isMobile = width < 768;
   return (
     <div className="overview-box-container">
       <h2>Let's take a look at overview</h2>
-
-      {width < 768 ? ( // UI for mobile
-        <TabFields>
-          <div>
-            <p>Approve</p>
-            <OverviewField itemsList={approveList} mobile />
-          </div>
-          <div>
-            <p>Discard</p>
-            <OverviewField itemsList={combinedDiscardArray} mobile />
-          </div>
-          <div>
-            <p>Total</p>
-            <Total productsInTotalArray={productsInTotalArray} mobile />
-          </div>
-        </TabFields>
+      {isMobile ? ( // UI for mobile
+        <div data-testid="test-fields-container-mobile">
+          <TabFields>
+            <div>
+              <p>Approve</p>
+              <OverviewField itemsList={approveList} mobile={isMobile} />
+            </div>
+            <div>
+              <p>Discard</p>
+              <OverviewField
+                itemsList={combinedDiscardArray}
+                mobile={isMobile}
+              />
+            </div>
+            <div>
+              <p>Total</p>
+              <Total
+                productsInTotalArray={productsInTotalArray}
+                mobile={isMobile}
+              />
+            </div>
+          </TabFields>
+        </div>
       ) : (
         // UI for tablet or desktop
-        <>
-          <div
-            className="overview-fields-container"
-            data-testid="test-fields-container"
-          >
-            <OverviewField itemsList={approveList} field="Approve" />
+        <div data-testid="test-fields-container">
+          <div className="overview-fields-container">
+            <OverviewField
+              itemsList={approveList}
+              field="Approve"
+              mobile={isMobile}
+            />
             <div className="field-separator"></div>
-            <OverviewField itemsList={combinedDiscardArray} field="Discard" />
+            <OverviewField
+              itemsList={combinedDiscardArray}
+              field="Discard"
+              mobile={isMobile}
+            />
           </div>
           <Total productsInTotalArray={productsInTotalArray} />
-        </>
+        </div>
       )}
     </div>
   );

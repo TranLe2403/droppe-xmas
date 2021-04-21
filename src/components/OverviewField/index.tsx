@@ -5,13 +5,16 @@ import { ProductListAfterAction } from "../ReviewBox";
 
 type Props = {
   itemsList: ProductListAfterAction[];
-  field?: string;
-  mobile?: boolean;
+  field?: "Approve" | "Discard";
+  mobile: boolean;
 };
 
 const OverviewField = ({ itemsList, field, mobile }: Props): JSX.Element => {
   return (
-    <div style={{ width: mobile ? "100%" : "45%" }}>
+    <div
+      style={{ width: mobile ? "100%" : "45%" }}
+      data-testid="test-overview-field-container"
+    >
       <div>
         {field && <h4>{field}</h4>}
 
