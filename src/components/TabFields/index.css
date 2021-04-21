@@ -1,0 +1,5 @@
+.all-tabs-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 30px;
+}

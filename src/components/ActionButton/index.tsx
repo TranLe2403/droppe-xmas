@@ -20,7 +20,10 @@ const ActionButton = ({
 
     if (!confirmWindow) return;
 
-    approveDiscardHandler(cartId, buttonName.toLowerCase() as "approve" | "discard");
+    approveDiscardHandler(
+      cartId,
+      buttonName.toLowerCase() as "approve" | "discard"
+    );
   };
 
   return (
@@ -35,6 +38,7 @@ const ActionButton = ({
         background: backgroundColor,
         color: "whitesmoke",
         fontWeight: "bold",
+        outline: "none",
       }}
       data-testid="test-action-button"
     >

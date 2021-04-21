@@ -9,9 +9,10 @@ type Props = {
     quantity: number;
     price: number;
   }[];
+  mobile?: boolean;
 };
 
-const Total = ({ productsInTotalArray }: Props): JSX.Element => {
+const Total = ({ productsInTotalArray, mobile }: Props): JSX.Element => {
   let finalTotal: number = 0;
 
   const getTotalPriceOfProduct = (price: number, quantity: number) => {
@@ -45,16 +46,16 @@ const Total = ({ productsInTotalArray }: Props): JSX.Element => {
 
   return (
     <div className="total-container">
-      <h3>Total</h3>
+      {!mobile && <h3>Total</h3>}
       <div>
         <div data-testid="test-final-product-list">
           {productsInTotalArray.map((item) => (
-            <div key={item.title} className="total-product-text">
+            <div key={item.title}>
               <p>
                 <strong>{item.title}</strong>
               </p>
               <p>
-                Price: €
+                Price: €{item.price} x {item.quantity} = €
                 {getTotalPriceOfProduct(item.price, item.quantity).toFixed(2)}
               </p>
               {item.repeatTimes > 1 && (
@@ -68,7 +69,7 @@ const Total = ({ productsInTotalArray }: Props): JSX.Element => {
             </div>
           ))}
         </div>
-        <h2 className="total-product-text" data-testid="test-final-price">
+        <h2 data-testid="test-final-price">
           Final Total: €{finalTotal.toFixed(2)}
         </h2>
       </div>

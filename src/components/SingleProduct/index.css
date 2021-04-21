@@ -29,12 +29,12 @@
 
 .product-detail-title {
   margin-bottom: 0;
-  height: 45%;
+  max-height: 100px;
 }
 
 .quantity-button {
   background: #165b33;
-  color: white;
+  color: whitesmoke;
   border: none;
   border-radius: 15px;
   text-align: center;
@@ -48,4 +48,8 @@
   width: 30px;
   height: 30px;
   font-size: 20px;
+}
+
+.product-price {
+  width: 40%;
 }

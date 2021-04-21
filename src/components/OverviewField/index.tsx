@@ -5,18 +5,21 @@ import { ProductListAfterAction } from "../ReviewBox";
 
 type Props = {
   itemsList: ProductListAfterAction[];
-  field: string;
+  field?: string;
+  mobile?: boolean;
 };
 
-const OverviewField = ({ itemsList, field }: Props): JSX.Element => {
+const OverviewField = ({ itemsList, field, mobile }: Props): JSX.Element => {
   return (
-    <div className="single-field-container">
+    <div style={{ width: mobile ? "100%" : "45%" }}>
       <div>
-        <h4>{field}</h4>
+        {field && <h4>{field}</h4>}
+
         <div style={{ color: "#cecece" }}>
           {itemsList.length === 0 && `No item on ${field} field`}
         </div>
       </div>
+
       {itemsList.map((item) => (
         <div key={item.childrenId}>
           <h5>Children{item.childrenId}</h5>
@@ -34,10 +37,7 @@ const OverviewField = ({ itemsList, field }: Props): JSX.Element => {
                   />
                   <p className="product-title">{product.title}</p>
                 </div>
-                <p>
-                  €{product.price} x {product.quantity} = €
-                  {product.price * product.quantity}
-                </p>
+                <p>quantity: {product.quantity}</p>
               </div>
             ))}
           </div>

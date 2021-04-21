@@ -118,7 +118,7 @@ const SingleProduct = ({
           </p>
 
           <div className="quantity-container">
-            <p style={{ width: "40%" }}>€{productDetail.price}</p>
+            <p className="product-price">€{productDetail.price}</p>
 
             <button
               onClick={() => updateQuantityHandler(productDetail.id, 1)}
