@@ -2,7 +2,7 @@ import React from "react";
 
 type Props = {
   buttonName: "Approve" | "Discard";
-  backgroundColor: "#165b33" | "#ea4630";
+  backgroundColor: "#f8b229" | "#ea4630";
   cartId: number;
   updateCartHandler: (id: number, action: "approve" | "discard") => void;
 };
@@ -15,7 +15,7 @@ const ActionButton = ({
 }: Props): JSX.Element => {
   const handleButtonClick = () => {
     const confirmWindow = window.confirm(
-      `Are you sure you want to ${buttonName.toUpperCase()} all products in this cart`
+      `Are you sure you want to ${buttonName.toUpperCase()} all products in this cart?`
     );
 
     if (!confirmWindow) return;

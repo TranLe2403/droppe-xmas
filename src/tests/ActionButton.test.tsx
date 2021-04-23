@@ -5,20 +5,20 @@ import "@testing-library/jest-dom/extend-expect";
 import ActionButton from "../components/ActionButton";
 
 describe("<ActionButton />", () => {
-  test("display with `Approve` text as title and #165b33 as background color", () => {
+  test("display with `Approve` text as title and ##f8b229 as background color", () => {
     const component = render(
       <ActionButton
         updateCartHandler={() => {}}
         buttonName="Approve"
         cartId={1}
-        backgroundColor="#165b33"
+        backgroundColor="#f8b229"
       />
     );
 
     const getElement = component.getByTestId("test-action-button");
 
     expect(getElement).toHaveTextContent("Approve");
-    expect(getElement.style.background).toBe("rgb(22, 91, 51)"); //convert hex code to rbg
+    expect(getElement.style.background).toBe("rgb(248, 178, 41)"); //convert hex code to rbg
   });
 
   test("display with `Discard` text as title and #ea4630 as background color", () => {
@@ -51,7 +51,7 @@ describe("<ActionButton />", () => {
         updateCartHandler={handleClick}
         buttonName="Approve"
         cartId={1}
-        backgroundColor="#165b33"
+        backgroundColor="#f8b229"
       />
     );
 

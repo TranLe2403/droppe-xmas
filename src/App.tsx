@@ -118,15 +118,7 @@ const App = (): JSX.Element => {
     return (
       <div className="App">
         <h1 className="app-header">DROPPE XMAS 🎄</h1>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 24,
-          }}
-          data-testid="test-no-content-text"
-        >
+        <div className="loading-text " data-testid="test-no-content-text">
           IS LOADING ...
         </div>
       </div>
@@ -155,7 +147,7 @@ const App = (): JSX.Element => {
             <div key={cart.id} className="single-cart-container">
               <div className="product-list-cover">
                 <h3>Children {cart.id}</h3>
-
+                <div className="separator"></div>
                 <ProductList
                   productList={cart.products}
                   setCartsForChildren={setCartsForChildren}
@@ -171,7 +163,7 @@ const App = (): JSX.Element => {
                   updateCartHandler={decisionHandler}
                   buttonName="Approve"
                   cartId={cart.id}
-                  backgroundColor="#165b33"
+                  backgroundColor="#f8b229"
                 />
                 <ActionButton
                   updateCartHandler={decisionHandler}

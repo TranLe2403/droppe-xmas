@@ -3,8 +3,8 @@ import moxios from "moxios";
 import { render, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import App from "./App";
-import { cartsMockData, productsMockData } from "./tests/mockData";
+import App from "../App";
+import { cartsMockData, productsMockData } from "./mockData";
 
 describe("<App />", () => {
   beforeEach(() => {
@@ -46,15 +46,10 @@ describe("<App />", () => {
       });
     });
 
-    await waitFor(
-      () => {
-        const getElement = component.getByTestId("test-carts-display");
+    await waitFor(() => {
+      const getElement = component.getByTestId("test-carts-display");
 
-        expect(getElement.childElementCount).toBe(5);
-      },
-      {
-        timeout: 3000,
-      }
-    );
+      expect(getElement.childElementCount).toBe(5);
+    });
   });
 });

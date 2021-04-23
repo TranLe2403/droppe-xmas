@@ -103,8 +103,6 @@ const SingleProduct = ({
 
   return (
     <div>
-      <div className="separator"></div>
-
       <div className="single-product-container">
         <img
           src={productDetail.image}

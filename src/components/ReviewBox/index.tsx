@@ -100,7 +100,8 @@ const ReviewBox = ({
   return (
     <div className="overview-box-container">
       <h2>Let's take a look at overview</h2>
-      {isMobile ? ( // UI for mobile
+      {isMobile ? (
+        // UI for mobile
         <div data-testid="test-fields-container-mobile">
           <TabFields>
             <div>
