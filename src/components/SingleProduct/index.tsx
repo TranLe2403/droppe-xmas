@@ -119,15 +119,15 @@ const SingleProduct = ({
             <p className="product-price">€{productDetail.price}</p>
 
             <button
-              onClick={() => updateQuantityHandler(productDetail.id, 1)}
+              onClick={() => updateQuantityHandler(productDetail.id, -1)}
               className="quantity-button"
               data-testid="test-substract-quantity-button"
             >
               -
             </button>
-            <p data-testid="test-product-quantity">{productDetail.quantity}</p>
+            <p data-testid="test-product-quantity" style={{width: 20, textAlign:"center"}}>{productDetail.quantity}</p>
             <button
-              onClick={() => updateQuantityHandler(productDetail.id, -1)}
+              onClick={() => updateQuantityHandler(productDetail.id, 1)}
               className="quantity-button"
               data-testid="test-plus-quantity-button"
             >

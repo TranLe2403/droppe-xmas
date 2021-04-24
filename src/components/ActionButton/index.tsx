@@ -39,6 +39,7 @@ const ActionButton = ({
         color: "whitesmoke",
         fontWeight: "bold",
         outline: "none",
+        cursor: "pointer",
       }}
       data-testid="test-action-button"
     >

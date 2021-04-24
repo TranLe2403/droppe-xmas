@@ -18,7 +18,7 @@ const Tab = ({ activeTab, label, tabHandler }: Props) => {
       onClick={onClick}
       style={{
         color: isActive ? "whitesmoke" : "black",
-        width: 70,
+        width: 90,
         height: 30,
         background: isActive ? "#165b33" : "whitesmoke",
         border: "thin solid #cecece",

@@ -28,10 +28,6 @@
 .product-list-cover {
   flex-grow: 1;
 }
-.single-cart-container:hover {
-  border: 3px solid #f8b229;
-  border-radius: 20px;
-}
 
 .button-cover {
   margin: 20px;

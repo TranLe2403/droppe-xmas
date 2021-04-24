@@ -15,20 +15,24 @@ import ActionButton from "./components/ActionButton";
 import ProductList from "./components/ProductList";
 import ReviewBox from "./components/ReviewBox";
 
+const baseURL = "https://fakestoreapi.com";
+
 const App = (): JSX.Element => {
   const [cartsForChildren, setCartsForChildren] = useState<ModifiedCart>();
   const [approveList, setApproveList] = useState<CartListWithAction[]>([]);
   const [discardList, setDiscardList] = useState<CartListWithAction[]>([]); // save discarded items from the whole card - clicking on discard button
-  const [discardItemList, setDiscardItemList] = useState<ModifiedCart>(); // save discarded items when clicking on x button
+  const [discardItemList, setDiscardItemList] = useState<ModifiedCart>(); // save discarded items when clicking on x button, rename
 
   useEffect(() => {
+    const cartsLimit = 5;
+
     const getFiveCartsForChildren = async () => {
       const { data: carts } = await axios.get<Cart[]>(
-        "https://fakestoreapi.com/carts?limit=5"
+        `${baseURL}/carts?limit=${cartsLimit}`
       );
 
       const { data: products } = await axios.get<Product[]>(
-        "https://fakestoreapi.com/products"
+        `${baseURL}/products`
       );
 
       // Handling data get from fetching APIs for convenient implementation later
