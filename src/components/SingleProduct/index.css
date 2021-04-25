@@ -56,3 +56,8 @@
 .product-price {
   width: 40%;
 }
+
+.quantity-text {
+  width: 20px;
+  text-align: center;
+}

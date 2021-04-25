@@ -8,12 +8,14 @@ export type Cart = {
 export type CartWithoutId = Omit<Cart, "id">;
 
 export type ModifiedCart = {
-  [id: number]: {
-    products: { [id: number]: ProductDetail };
-    date: string;
-    id: number;
-    userId: number;
-  };
+  [id: number]:
+    | {
+        products: { [id: number]: ProductDetail };
+        date: string;
+        id: number;
+        userId: number;
+      }
+    | undefined;
 };
 
 export type ProductInCart = {
@@ -33,6 +35,15 @@ export type Product = {
 export type ProductDetail = Product & Pick<ProductInCart, "quantity">;
 
 export type CartListWithAction = {
-  childrenId: number;
+  cartId: number;
   products: ProductDetail[];
+};
+
+export type SingleCart = {
+  products: {
+    [id: number]: ProductDetail;
+  };
+  date: string;
+  id: number;
+  userId: number;
 };

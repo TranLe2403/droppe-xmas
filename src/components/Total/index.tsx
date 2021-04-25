@@ -49,8 +49,8 @@ const Total = ({ productsInTotalArray, mobile }: Props): JSX.Element => {
       {!mobile && <h3>Total</h3>}
       <div>
         <div data-testid="test-final-product-list">
-          {productsInTotalArray.map((item) => (
-            <div key={item.title}>
+          {productsInTotalArray.map((item, index) => (
+            <div key={item.title + index}>
               <p>
                 <strong>{item.title}</strong>
               </p>

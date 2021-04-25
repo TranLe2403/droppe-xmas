@@ -1,58 +1,51 @@
 import React from "react";
 
 import "./index.css";
-import { ModifiedCart, ProductDetail } from "../../types";
+import { CartListWithAction, ModifiedCart, ProductDetail } from "../../types";
+import { useCartContext } from "../../context/childrenCartContext";
+import { SingleCart } from "../../types";
 
 type Props = {
   productDetail: ProductDetail;
-  cartId: number;
-  cartsForChildren: ModifiedCart;
-  setCartsForChildren: React.Dispatch<
-    React.SetStateAction<ModifiedCart | undefined>
-  >;
-  discardItemList: ModifiedCart | undefined;
-  setDiscardItemList: React.Dispatch<
-    React.SetStateAction<ModifiedCart | undefined>
-  >;
+  cart: SingleCart;
+  onDiscardListUpdate: (discardItem: CartListWithAction) => void;
 };
 
 const SingleProduct = ({
   productDetail,
-  setCartsForChildren,
-  cartId,
-  cartsForChildren,
-  discardItemList,
-  setDiscardItemList,
+  cart,
+  onDiscardListUpdate,
 }: Props): JSX.Element => {
+  const { childrenCarts, setChildrenCarts } = useCartContext();
+
   if (!productDetail) return <p>Loading...</p>;
 
   const updateQuantityHandler = (id: number, sign: 1 | -1) => {
-    const cartsForChildrenCopy = { ...cartsForChildren };
+    const cartsForChildrenCopy = { ...childrenCarts };
 
-    const quantityOfTargetItem =
-      cartsForChildrenCopy[cartId].products[id].quantity;
+    const quantityOfTargetItem = productDetail.quantity;
 
     const newProductDetail = {
-      ...cartsForChildrenCopy[cartId].products[id],
+      ...productDetail,
       quantity: quantityOfTargetItem + sign,
     } as ProductDetail;
 
-    if (newProductDetail.quantity < 0) {
-      newProductDetail.quantity = 0;
+    if (newProductDetail.quantity < 1) {
+      newProductDetail.quantity = 1;
     }
 
     const updatedCart: ModifiedCart = {
       ...cartsForChildrenCopy,
-      [cartId]: {
-        ...cartsForChildrenCopy[cartId],
+      [cart.id]: {
+        ...cart,
         products: {
-          ...cartsForChildrenCopy[cartId].products,
+          ...cart.products,
           [id]: newProductDetail,
         },
       },
     };
 
-    setCartsForChildren(updatedCart);
+    setChildrenCarts(updatedCart);
   };
 
   const discardSingleProductHandler = (productId: number) => {
@@ -61,13 +54,12 @@ const SingleProduct = ({
     );
     if (!confirmWindow) return;
 
-    const cartsForChildrenCopy = { ...cartsForChildren };
-    const discardItemListCopy = { ...discardItemList };
+    const cartsForChildrenCopy = { ...childrenCarts };
 
     // remove the product out of cart and update to state
     const productList: { [id: number]: ProductDetail } = {};
 
-    Object.entries(cartsForChildrenCopy[cartId].products).forEach((item) => {
+    Object.entries(cart.products).forEach((item) => {
       if (Number(item[0]) !== productId) {
         productList[Number(item[0])] = item[1];
       }
@@ -75,30 +67,17 @@ const SingleProduct = ({
 
     const updatedCarts = {
       ...cartsForChildrenCopy,
-      [cartId]: {
-        ...cartsForChildrenCopy[cartId],
+      [cart.id]: {
+        ...cart,
         products: productList,
       },
     };
 
-    // get the removed item and put it to discardItemList state
-    const extractItem = cartsForChildrenCopy[cartId].products[productId];
-
     // the updated object can could cover either the target cartId is already saved on discardItemList state or not
-    const discardItem: ModifiedCart = {
-      ...discardItemListCopy,
-      [cartId]: {
-        ...cartsForChildrenCopy[cartId],
-        products: {
-          ...discardItemListCopy[cartId]?.products,
-          [productId]: extractItem,
-        },
-      },
-    };
 
-    setDiscardItemList(discardItem);
+    onDiscardListUpdate({ cartId: cart.id, products: [productDetail] });
 
-    setCartsForChildren(updatedCarts);
+    setChildrenCarts(updatedCarts);
   };
 
   return (
@@ -125,7 +104,9 @@ const SingleProduct = ({
             >
               -
             </button>
-            <p data-testid="test-product-quantity" style={{width: 20, textAlign:"center"}}>{productDetail.quantity}</p>
+            <p data-testid="test-product-quantity" className="quantity-text">
+              {productDetail.quantity}
+            </p>
             <button
               onClick={() => updateQuantityHandler(productDetail.id, 1)}
               className="quantity-button"

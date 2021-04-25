@@ -1,41 +1,25 @@
 import React from "react";
+import { SingleCart } from "../../types";
 
-import { ModifiedCart, ProductDetail } from "../../types";
+import { CartListWithAction, ProductDetail } from "../../types";
 import SingleProduct from "../SingleProduct";
 
 type Props = {
   productList: { [id: number]: ProductDetail };
-  cartId: number;
-  cartsForChildren: ModifiedCart;
-  setCartsForChildren: React.Dispatch<
-    React.SetStateAction<ModifiedCart | undefined>
-  >;
-  discardItemList: ModifiedCart | undefined;
-  setDiscardItemList: React.Dispatch<
-    React.SetStateAction<ModifiedCart | undefined>
-  >;
+  cart: SingleCart;
+  onDiscardListUpdate: (discardItem: CartListWithAction) => void;
 };
 
-const ProductList = ({
-  productList,
-  setCartsForChildren,
-  cartId,
-  cartsForChildren,
-  discardItemList,
-  setDiscardItemList,
-}: Props) => {
+const ProductList = ({ productList, cart, onDiscardListUpdate }: Props) => {
   return (
     <div data-testid="test-product-list">
       {Object.values(productList).map((item) => {
         return (
           <SingleProduct
-            key={item.id}
+            key={item.id + item.description + item.quantity}
             productDetail={item}
-            setCartsForChildren={setCartsForChildren}
-            cartId={cartId}
-            cartsForChildren={cartsForChildren}
-            discardItemList={discardItemList}
-            setDiscardItemList={setDiscardItemList}
+            cart={cart}
+            onDiscardListUpdate={onDiscardListUpdate}
           />
         );
       })}

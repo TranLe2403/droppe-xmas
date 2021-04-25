@@ -1,10 +1,10 @@
 import React from "react";
 
 import "./index.css";
-import { ProductListAfterAction } from "../ReviewBox";
+import { CartListWithAction } from "../../types";
 
 type Props = {
-  itemsList: ProductListAfterAction[];
+  itemsList: CartListWithAction[];
   field?: "Approve" | "Discard";
   mobile: boolean;
 };
@@ -24,14 +24,11 @@ const OverviewField = ({ itemsList, field, mobile }: Props): JSX.Element => {
       </div>
 
       {itemsList.map((item) => (
-        <div key={item.childrenId}>
-          <h5>Children{item.childrenId}</h5>
+        <div key={item.cartId}>
+          <h5>Children {item.cartId}</h5>
           <div>
-            {item.products.map((product) => (
-              <div
-                className="product-info"
-                key={`${product.id}+${product.title}`}
-              >
+            {item.products.map((product, index) => (
+              <div className="product-info" key={product.id}>
                 <div className="product-image-title-cover ">
                   <img
                     className="overview-image"

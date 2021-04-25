@@ -1,17 +1,19 @@
 import React from "react";
 
+import { SingleCart } from "../../types";
+
 type Props = {
   buttonName: "Approve" | "Discard";
   backgroundColor: "#f8b229" | "#ea4630";
-  cartId: number;
-  updateCartHandler: (id: number, action: "approve" | "discard") => void;
+  cart: SingleCart;
+  updateCartHandler: (cart: SingleCart, action: "approve" | "discard") => void;
 };
 
 const ActionButton = ({
   buttonName,
   backgroundColor,
   updateCartHandler: approveDiscardHandler,
-  cartId,
+  cart,
 }: Props): JSX.Element => {
   const handleButtonClick = () => {
     const confirmWindow = window.confirm(
@@ -21,7 +23,7 @@ const ActionButton = ({
     if (!confirmWindow) return;
 
     approveDiscardHandler(
-      cartId,
+      cart,
       buttonName.toLowerCase() as "approve" | "discard"
     );
   };

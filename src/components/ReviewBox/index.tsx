@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import "./index.css";
-import { ModifiedCart, ProductDetail } from "../../types";
+import { CartListWithAction, ProductDetail } from "../../types";
 import OverviewField from "../OverviewField";
 import Total from "../Total";
 import TabFields from "../TabFields";
-
-export type ProductListAfterAction = {
-  childrenId: number;
-  products: ProductDetail[];
-};
 
 type ProductForTotal = {
   [id: number]: {
@@ -21,19 +16,11 @@ type ProductForTotal = {
 };
 
 type Props = {
-  discardList: ProductListAfterAction[];
-  approveList: ProductListAfterAction[];
-  discardItemList: ModifiedCart | undefined;
+  discardList: CartListWithAction[];
+  approveList: CartListWithAction[];
 };
 
-const ReviewBox = ({
-  discardList,
-  approveList,
-  discardItemList,
-}: Props): JSX.Element => {
-  const [combinedDiscardArray, setCombinedDiscardArray] = useState<
-    ProductListAfterAction[]
-  >([]);
+const ReviewBox = ({ discardList, approveList }: Props): JSX.Element => {
   const [allApprovedProductList, setAllApprovedProductList] = useState<
     ProductDetail[]
   >([]);
@@ -57,25 +44,12 @@ const ReviewBox = ({
   }, []);
 
   useEffect(() => {
-    if (discardItemList) {
-      // possible to be undefined
-      const itemlist = Object.values(discardItemList);
-
-      const newItemList: ProductListAfterAction[] = itemlist.map((item) => {
-        return { childrenId: item.id, products: Object.values(item.products) };
-      });
-
-      setCombinedDiscardArray(discardList.concat(newItemList));
-    } else {
-      setCombinedDiscardArray(discardList);
-    }
-
     const approvedProductList = approveList.reduce((acc, val) => {
       return acc.concat(val.products);
     }, [] as ProductDetail[]);
 
     setAllApprovedProductList(approvedProductList);
-  }, [discardList, discardItemList, approveList]);
+  }, [discardList, approveList]);
 
   const productsForTotal: ProductForTotal = allApprovedProductList.reduce(
     (acc: ProductForTotal, val) => {
@@ -110,10 +84,7 @@ const ReviewBox = ({
             </div>
             <div>
               <p>Discard</p>
-              <OverviewField
-                itemsList={combinedDiscardArray}
-                mobile={isMobile}
-              />
+              <OverviewField itemsList={discardList} mobile={isMobile} />
             </div>
             <div>
               <p>Total</p>
@@ -135,7 +106,7 @@ const ReviewBox = ({
             />
             <div className="field-separator"></div>
             <OverviewField
-              itemsList={combinedDiscardArray}
+              itemsList={discardList}
               field="Discard"
               mobile={isMobile}
             />
