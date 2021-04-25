@@ -3,8 +3,7 @@ import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
 import OverviewField from "../components/OverviewField";
-import { ProductDetail } from "../types";
-import { ProductListAfterAction } from "../components/ReviewBox";
+import { CartListWithAction, ProductDetail } from "../types";
 
 const ProductslMockData: ProductDetail[] = [
   {
@@ -27,9 +26,9 @@ const ProductslMockData: ProductDetail[] = [
   },
 ];
 
-const itemsList: ProductListAfterAction[] = [
+const itemsList: CartListWithAction[] = [
   {
-    childrenId: 1,
+    cartId: 1,
     products: ProductslMockData,
   },
 ];

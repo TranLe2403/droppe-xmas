@@ -3,6 +3,14 @@ import { fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
 import ActionButton from "../components/ActionButton";
+import { SingleCart } from "../types";
+
+export const mockData: SingleCart = {
+  products: {},
+  date: "",
+  id: 1,
+  userId: 2,
+};
 
 describe("<ActionButton />", () => {
   test("display with `Approve` text as title and ##f8b229 as background color", () => {
@@ -10,7 +18,7 @@ describe("<ActionButton />", () => {
       <ActionButton
         updateCartHandler={() => {}}
         buttonName="Approve"
-        cartId={1}
+        cart={mockData}
         backgroundColor="#f8b229"
       />
     );
@@ -26,7 +34,7 @@ describe("<ActionButton />", () => {
       <ActionButton
         updateCartHandler={() => {}}
         buttonName="Discard"
-        cartId={1}
+        cart={mockData}
         backgroundColor="#ea4630"
       />
     );
@@ -50,7 +58,7 @@ describe("<ActionButton />", () => {
       <ActionButton
         updateCartHandler={handleClick}
         buttonName="Approve"
-        cartId={1}
+        cart={mockData}
         backgroundColor="#f8b229"
       />
     );

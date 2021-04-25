@@ -2,8 +2,8 @@ import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import ReviewBox, { ProductListAfterAction } from "../components/ReviewBox";
-import { ProductDetail } from "../types";
+import ReviewBox from "../components/ReviewBox";
+import { CartListWithAction, ProductDetail } from "../types";
 
 const approveProductlMockData: ProductDetail[] = [
   {
@@ -38,16 +38,16 @@ const discardProductlMockData: ProductDetail[] = [
   },
 ];
 
-const approveList: ProductListAfterAction[] = [
+const approveList: CartListWithAction[] = [
   {
-    childrenId: 1,
+    cartId: 1,
     products: approveProductlMockData,
   },
 ];
 
-const discardList: ProductListAfterAction[] = [
+const discardList: CartListWithAction[] = [
   {
-    childrenId: 2,
+    cartId: 2,
     products: discardProductlMockData,
   },
 ];
@@ -55,11 +55,7 @@ const discardList: ProductListAfterAction[] = [
 describe("<ReviewBox />", () => {
   test("has two field in the overview part which are Approve and Discard product lists", () => {
     const component = render(
-      <ReviewBox
-        discardList={discardList}
-        approveList={approveList}
-        discardItemList={undefined}
-      />
+      <ReviewBox discardList={discardList} approveList={approveList} />
     );
 
     const getElement = component.getByTestId("test-fields-container");
@@ -75,11 +71,7 @@ describe("Responsive ReviewBox", () => {
   test("should display 3 buttons standing for Approve, Discard and Total and Approve option is chosen as default", () => {
     window = Object.assign(window, { innerWidth: 600 });
     const component = render(
-      <ReviewBox
-        discardList={discardList}
-        approveList={approveList}
-        discardItemList={undefined}
-      />
+      <ReviewBox discardList={discardList} approveList={approveList} />
     );
 
     const getElement = component.getByTestId("test-fields-container-mobile");

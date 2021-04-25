@@ -3,6 +3,7 @@ import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
 import ProductList from "../components/ProductList";
+import { SingleCart } from "../types";
 
 const productDetailMockData = {
   1: {
@@ -25,13 +26,11 @@ const productDetailMockData = {
   },
 };
 
-const cartsForChildrenMockData = {
-  1: {
-    products: productDetailMockData,
-    date: "19/04/2021",
-    id: 2,
-    userId: 1,
-  },
+const cartsForChildrenMockData: SingleCart = {
+  products: productDetailMockData,
+  date: "19/04/2021",
+  id: 2,
+  userId: 1,
 };
 
 describe("<ProductList />", () => {
@@ -39,11 +38,8 @@ describe("<ProductList />", () => {
     const component = render(
       <ProductList
         productList={productDetailMockData}
-        setCartsForChildren={() => {}}
-        cartId={1}
-        cartsForChildren={cartsForChildrenMockData}
-        discardItemList={undefined}
-        setDiscardItemList={() => {}}
+        cart={cartsForChildrenMockData}
+        onDiscardListUpdate={() => {}}
       />
     );
 
