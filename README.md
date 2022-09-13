@@ -1,6 +1,4 @@
-# Droppe Xmas
-
-This is an pre-assignment from Droppe to apply for Frontend Developer position.
+# Xmas wishlist
 
 ## How could I run the application?
 
